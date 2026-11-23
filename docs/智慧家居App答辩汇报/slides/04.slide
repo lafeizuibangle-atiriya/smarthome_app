@@ -1,0 +1,49 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'column', background: '#FFFFFF' }}>
+    <Box style={{ width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ width: 1280, height: 78, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40', borderBottom: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>数据规模：一个能跑起来的完整闭环</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8', letterSpacing: 3 }}>主讲 · 组长</Text>
+    </Box>
+    <Box style={{ flex: 1, padding: '20px 40px 0px 40px', flexDirection: 'column', gap: 16 }}>
+        <Box style={{ flexDirection: 'row', gap: 20, flex: 3 }}>
+            <Box style={{ flex: 3, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '24px 32px', justifyContent: 'center' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 18 }}>
+                    <Text style={{ fontSize: 120, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1 }}>17</Text>
+                    <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#1A2230', paddingBottom: 14 }}>种设备类型</Text>
+                </Box>
+                <Text style={{ fontSize: 19, color: '#4A5568', marginTop: 12 }}>灯 / 空调 / 窗帘 / 水泵 / 门禁 / 洗衣机 / 扫地机 / 智能马桶 / 电视 / 投影……每种都有符合自身语义的可调面板与定时支持</Text>
+            </Box>
+            <Box style={{ flex: 2, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '24px 32px', justifyContent: 'center' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 18 }}>
+                    <Text style={{ fontSize: 120, fontWeight: 'bold', color: '#0E3F8C', lineHeight: 1 }}>16</Text>
+                    <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#1A2230', paddingBottom: 14 }}>张数据表</Text>
+                </Box>
+                <Text style={{ fontSize: 19, color: '#4A5568', marginTop: 12 }}>覆盖账号 / 设备 / 环境 / 场景 / 商城全业务，演示态一键可复现</Text>
+            </Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', gap: 20, flex: 2 }}>
+            <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 12, padding: '18px 32px', justifyContent: 'center' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 16 }}>
+                    <Text style={{ fontSize: 76, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1 }}>54</Text>
+                    <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1A2230', paddingBottom: 8 }}>个接口映射 · 12 个控制器</Text>
+                </Box>
+                <Text style={{ fontSize: 17, color: '#4A5568', marginTop: 8 }}>后端严格 Controller → Service → Mapper 三层</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 12, padding: '18px 32px', justifyContent: 'center' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 16 }}>
+                    <Text style={{ fontSize: 76, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1 }}>26<span style={{ fontSize: 40 }}>/26</span></Text>
+                    <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1A2230', paddingBottom: 8 }}>项链路自测全过</Text>
+                </Box>
+                <Text style={{ fontSize: 17, color: '#4A5568', marginTop: 8 }}>覆盖类型字典 / 语义联动 / 越界拒绝 / 只读字段丢弃</Text>
+            </Box>
+        </Box>
+        <Box style={{ height: 78, background: '#0E3F8C', borderRadius: 12, flexDirection: 'row', alignItems: 'center', padding: '0 28px', gap: 14 }}>
+            <FAIcon name='check-circle' style={{ fill: '#FFC107', width: 28, height: 28 }} />
+            <Text style={{ fontSize: 21, color: '#FFFFFF', lineHeight: 1.5 }}>数字背后的判断：这不是一个界面 Demo，而是功能全闭环、关键链路全部验证过的完整系统 —— 可演示、可复现、可继续开发。</Text>
+        </Box>
+    </Box>
+    <Box style={{ width: 1280, height: 58, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>04 / 24</Text>
+    </Box>
+</Slide>

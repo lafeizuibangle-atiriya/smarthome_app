@@ -1,0 +1,22 @@
+{
+  "src": [
+    "pages/AdPage",
+    "pages/Index",
+    "pages/login/LoginPage",
+    "pages/login/RegisterPage",
+    "pages/home/RoomManagePage",
+    "pages/device/DeviceDetailPage",
+    "pages/device/AddDevicePage",
+    "pages/smart/SceneEditPage",
+    "pages/smart/AutoDetailPage",
+    "pages/product/ProductDetailPage",
+    "pages/shop/GoodsDetailPage",
+    "pages/shop/CartPage",
+    "pages/shop/OrderConfirmPage",
+    "pages/shop/PayPage",
+    "pages/shop/PayResultPage",
+    "pages/mine/OrderListPage",
+    "pages/mine/OrderDetailPage",
+    "pages/mine/SettingsPage"
+  ]
+}

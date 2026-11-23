@@ -1,0 +1,42 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'column', background: '#FFFFFF' }}>
+    <Box style={{ width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ width: 1280, height: 78, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40', borderBottom: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>三方服务与商城：密钥不进 App，金额不出错</Text>
+        <Box style={{ background: '#F0F5FC', borderRadius: 16, padding: '5px 16px', border: '1px solid #D6DCE5' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1E4FA8' }}>主讲 · B · 后端业务</Text>
+        </Box>
+    </Box>
+    <Box style={{ flex: 1, padding: '18px 40px 10px 40px', flexDirection: 'column', gap: 14 }}>
+        <Box style={{ flexDirection: 'row', gap: 16, flex: 1 }}>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '16px 24px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='cloud' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 23, fontWeight: 'bold', color: '#1A2230' }}>和风天气（真实三方）</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>后端代理转发，API KEY 永不下发到 App；10 分钟内存缓存控调用频率；33 城清单，首页天气卡 60 分钟自动刷新。</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '16px 24px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='envelope' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 23, fontWeight: 'bold', color: '#1A2230' }}>邮箱验证码注册</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>QQ SMTP 发信；Redis 存验证码 TTL 60 秒，key 还在就拒绝重发（天然冷却）；验证码一次性，用后即删。</Text>
+            </Box>
+        </Box>
+        <Box style={{ height: 150, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '16px 24px' }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                <FAIcon name='shopping-cart' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 23, fontWeight: 'bold', color: '#1A2230' }}>商城与订单：一个事务保数据一致</Text>
+            </Box>
+            <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>下单三步在同一数据库事务里：<span style={{ fontWeight: 'bold', color: '#1A2230' }}>扣库存 → 生成订单明细快照 → 清购物车</span>，任一步失败整体回滚；金额字段一律 BigDecimal，杜绝浮点误差。</Text>
+        </Box>
+        <Box style={{ height: 62, background: '#0E3F8C', borderRadius: 12, flexDirection: 'row', alignItems: 'center', padding: '0 28px', gap: 14 }}>
+            <FAIcon name='shield' style={{ fill: '#FFC107', width: 24, height: 24 }} />
+            <Text style={{ fontSize: 20, color: '#FFFFFF' }}>三方调用三原则：密钥不下发、请求走后端代理、缓存控频率。</Text>
+        </Box>
+    </Box>
+    <Box style={{ width: 1280, height: 58, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>14 / 24</Text>
+    </Box>
+</Slide>

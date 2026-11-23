@@ -1,0 +1,42 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'row', background: '#FFFFFF' }}>
+    <Box style={{ width: 380, height: 720, background: '#0E3F8C', padding: '70px 40px 0px 40px' }}>
+        <Box style={{ width: 56, height: 6, background: '#FFC107', borderRadius: 3, marginBottom: 26 }} />
+        <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.35 }}>字典化{'\n'}类型系统</Text>
+        <Text style={{ fontSize: 19, color: '#BFD4F2', marginTop: 22, lineHeight: 1.7 }}>17 种类型的常量、中文名、默认状态、mode 白名单，收敛到后端一个字典类 DeviceTypes。</Text>
+        <Box style={{ marginTop: 18, background: '#F0F5FC', borderRadius: 16, padding: '5px 16px' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1E4FA8' }}>主讲 · A · 后端架构</Text>
+        </Box>
+        <Box style={{ marginTop: 40, background: '#1E4FA8', borderRadius: 12, padding: '20px 22px', border: '1px solid #3D7BD9' }}>
+            <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#FFC107' }}>加一种设备</Text>
+            <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#FFC107', marginTop: 6 }}>= 字典加两行</Text>
+            <Text style={{ fontSize: 17, color: '#DCE8FA', marginTop: 12, lineHeight: 1.6 }}>不再是散在 17 个 if-else 里，漏一处就炸。</Text>
+        </Box>
+    </Box>
+    <Box style={{ flex: 1, height: 720, padding: '56px 40px 40px 36px', flexDirection: 'column', gap: 18 }}>
+        <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '20px 26px' }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                <FAIcon name='clipboard' style={{ fill: '#1E4FA8', width: 26, height: 26 }} />
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1A2230' }}>DeviceTypes 字典类：唯一事实来源</Text>
+            </Box>
+            <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.65 }}>类型常量 → 中文名 → 默认状态 JSON → mode 白名单，全部集中定义；<span style={{ fontWeight: 'bold', color: '#1A2230' }}>types() 接口、add() 默认状态、控制校验都从字典取</span>。本次从 9 种扩到 17 种设备，每新增一种只改字典和前端展示两处，后端零散分支不再增长。</Text>
+        </Box>
+        <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '20px 26px' }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                <FAIcon name='clock' style={{ fill: '#1E4FA8', width: 26, height: 26 }} />
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1A2230' }}>applyTimer：全类型通用定时开关</Text>
+            </Box>
+            <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.65 }}>所有设备统一 timerOn / timerOff 两个 HH:mm 字段；DeviceTimedTask 每分钟扫描全表、<span style={{ fontWeight: 'bold', color: '#1A2230' }}>关机优先</span>；"开 / 关"由 applyTimer 映射到各类型语义字段（窗帘=开合度、水泵=watering、门禁=反向 locked），<span style={{ fontWeight: 'bold', color: '#1A2230' }}>加新类型只补一行映射</span>。</Text>
+        </Box>
+        <Box style={{ height: 130, background: '#F0F5FC', borderRadius: 12, padding: '18px 26px' }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                <FAIcon name='database' style={{ fill: '#1E4FA8', width: 26, height: 26 }} />
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0E3F8C' }}>④ 防乱码与可复现演示态</Text>
+            </Box>
+            <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.6 }}>SQL 收敛为唯一脚本 init_all.sql（全新演示态 / 老库幂等增量两段），配套 db_tool.py 一键 backup / reset / verify，verify 自带中文 HEX 校验。</Text>
+        </Box>
+    </Box>
+    <Box style={{ position: 'absolute', bottom: 14, left: 40, width: 1200, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#BFD4F2' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>09 / 24</Text>
+    </Box>
+</Slide>

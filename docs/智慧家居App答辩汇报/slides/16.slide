@@ -1,0 +1,23 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #0E3F8C 0%, #1E4FA8 62%, #2A5FB8 100%)' }}>
+    <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720 }}>
+        <svg width={1280} height={720} viewBox='0 0 1280 720'>
+            <g stroke='#FFFFFF' strokeOpacity='0.13' strokeWidth='2' fill='none'>
+                <circle cx='200' cy='580' r='160' />
+                <circle cx='200' cy='580' r='100' />
+                <path d='M1000 120 L1080 50 L1160 120 L1160 190 L1000 190 Z' />
+                <path d='M1050 155 L1050 120 L1110 120 L1110 190' />
+            </g>
+            <g fill='#FFFFFF' fillOpacity='0.18'>
+                <circle cx='200' cy='580' r='10' />
+                <circle cx='1080' cy='120' r='8' />
+            </g>
+        </svg>
+    </Box>
+    <Box style={{ position: 'absolute', top: 230, left: 0, width: 1280, flexDirection: 'column', alignItems: 'center', gap: 30 }}>
+        <Text style={{ fontSize: 22, color: '#BFD4F2', letterSpacing: 8 }}>THANKS FOR LISTENING</Text>
+        <Text style={{ fontSize: 68, fontWeight: 'bold', color: '#FFFFFF' }}>恳请各位老师批评指正</Text>
+        <Box style={{ width: 120, height: 4, background: '#FFC107', borderRadius: 2 }} />
+        <Text style={{ fontSize: 24, color: '#DCE8FA' }}>智慧家居 App（仿米家）· 五人小组课程结项</Text>
+        <Text style={{ fontSize: 19, color: '#BFD4F2', marginTop: 8 }}>前后端完整闭环 · 17 种设备 · 26/26 自测通过 · 2026 年 9 月</Text>
+    </Box>
+</Slide>

@@ -1,0 +1,72 @@
+# ============================================================
+# 配置模板 —— 组员使用说明
+# 1. 复制本文件改名为 application.yml（放在同一目录）
+# 2. 把下面「请填写」的值换成你自己的
+# 3. 真实的 application.yml 已被 .gitignore 排除，不会被提交
+# 改完配置必须：Ctrl+S 保存 -> Rebuild(Ctrl+F9) -> 重启进程
+# ============================================================
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/smart_home?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: "请填写你的MySQL密码"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+      connection-timeout: 3000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: "请填写你的QQ邮箱"
+    password: "请填写QQ邮箱授权码（设置-账户-开启SMTP获得）"
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+
+# 和风天气开发版 KEY：console.qweather.com 免费申请
+qweather:
+  api:
+    url: https://devapi.qweather.com/v7/weather/now
+    key: "请填写你的和风天气KEY"
+    location: "101240101"                 # 默认城市：南昌
+
+# 华为云 IoTDA（没有硬件环境就把 enabled 设为 false，云端逻辑自动跳过）
+huawei:
+  iot:
+    enabled: false
+    endpoint: "请填写你的IoTDA应用侧API域名"
+    region: cn-east-3
+    project-id: "请填写项目ID"
+    iam-domain-name: "请填写主账号名"
+    iam-user-name: "请填写IAM子用户名"
+    iam-password: "请填写IAM子用户密码"
+    device-id: "请填写设备ID"
+    service-id: smart_home
+    amqp-host: "请填写AMQP接入域名"
+    amqp-access-key: "请填写接入凭证AK"
+    amqp-access-code: "请填写接入凭证code"
+    amqp-queue-name: DefaultQueue
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+  global-config:
+    db-config:
+      id-type: auto

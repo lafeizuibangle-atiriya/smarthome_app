@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 140" width="340" height="140">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3478F6"/>
+      <stop offset="1" stop-color="#5B9BFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="340" height="140" fill="url(#bg)"/>
+  <circle cx="286" cy="34" r="58" fill="#FFFFFF" fill-opacity="0.12"/>
+  <circle cx="310" cy="112" r="40" fill="#FFFFFF" fill-opacity="0.10"/>
+  <text x="28" y="62" font-family="sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">全屋智能焕新季</text>
+  <text x="28" y="92" font-family="sans-serif" font-size="14" fill="#FFFFFF" fill-opacity="0.85">灯光 · 空调 · 窗帘 · 安防 一屏掌控</text>
+</svg>

@@ -1,0 +1,59 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'column', background: '#FFFFFF' }}>
+    <Box style={{ width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ width: 1280, height: 78, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40', borderBottom: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>验证结论与未来工作</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8', letterSpacing: 3 }}>主讲 · 组长</Text>
+    </Box>
+    <Box style={{ flex: 1, padding: '20px 40px 10px 40px', flexDirection: 'column', gap: 18 }}>
+        <Box style={{ flexDirection: 'row', gap: 18, height: 236 }}>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 24px', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1 }}>26<span style={{ fontSize: 32 }}>/26</span></Text>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', marginTop: 8 }}>链路自测全部通过</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6, lineHeight: 1.45 }}>类型字典 · 语义联动 · 越界与白名单 400 · 只读字段丢弃</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 24px', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1 }}>双端编译通过</Text>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', marginTop: 8 }}>后端 EXIT=0 · 前端 HAP 2.89 MB</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6, lineHeight: 1.45 }}>mvnw 离线编译 + hvigor 全量 assembleHap，真机可装</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 24px', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1 }}>0 乱码</Text>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', marginTop: 8 }}>16 张表中文 HEX 校验全绿</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6, lineHeight: 1.45 }}>演示态一键 reset：1 用户 · 4 房间 · 19 设备 · 12 商品</Text>
+            </Box>
+        </Box>
+        <Box style={{ flex: 1, flexDirection: 'column', gap: 12 }}>
+            <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0E3F8C' }}>可继续演进的四个方向</Text>
+            <Box style={{ flexDirection: 'row', gap: 14, flex: 1 }}>
+                <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 12, padding: '16px 20px' }}>
+                    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1E4FA8' }}>01</Text>
+                    <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230', marginTop: 8 }}>跨设备联动引擎</Text>
+                    <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6, lineHeight: 1.5 }}>烟雾报警 → 自动开锁 / 关燃气阀</Text>
+                </Box>
+                <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 12, padding: '16px 20px' }}>
+                    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1E4FA8' }}>02</Text>
+                    <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230', marginTop: 8 }}>系统通知推送</Text>
+                    <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6, lineHeight: 1.5 }}>告警 / 订单状态替代应用内轮询</Text>
+                </Box>
+                <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 12, padding: '16px 20px' }}>
+                    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1E4FA8' }}>03</Text>
+                    <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230', marginTop: 8 }}>接入真实硬件</Text>
+                    <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6, lineHeight: 1.5 }}>涂鸦 / Home Assistant 网关替换模拟</Text>
+                </Box>
+                <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 12, padding: '16px 20px' }}>
+                    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1E4FA8' }}>04</Text>
+                    <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230', marginTop: 8 }}>单元测试补齐</Text>
+                    <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6, lineHeight: 1.5 }}>接口自测之外补 JUnit 服务层用例</Text>
+                </Box>
+            </Box>
+        </Box>
+        <Box style={{ height: 66, background: '#0E3F8C', borderRadius: 12, flexDirection: 'row', alignItems: 'center', padding: '0 28px', gap: 14 }}>
+            <FAIcon name='flag' style={{ fill: '#FFC107', width: 24, height: 24 }} />
+            <Text style={{ fontSize: 20, color: '#FFFFFF' }}>结论：功能全闭环、链路全验证、过程全留痕 —— 项目达到可交付、可答辩、可继续开发的状态。</Text>
+        </Box>
+    </Box>
+    <Box style={{ width: 1280, height: 58, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>23 / 24</Text>
+    </Box>
+</Slide>

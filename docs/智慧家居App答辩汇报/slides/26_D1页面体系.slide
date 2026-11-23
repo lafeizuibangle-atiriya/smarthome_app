@@ -1,0 +1,51 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'column', background: '#FFFFFF' }}>
+    <Box style={{ width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ width: 1280, height: 78, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40', borderBottom: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>页面体系：18 个 @Entry 撑起完整闭环</Text>
+        <Box style={{ background: '#F0F5FC', borderRadius: 16, padding: '5px 16px', border: '1px solid #D6DCE5' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1E4FA8' }}>主讲 · D · 前端页面</Text>
+        </Box>
+    </Box>
+    <Box style={{ flex: 1, padding: '18px 40px 10px 40px', flexDirection: 'column', gap: 14 }}>
+        <Box style={{ flexDirection: 'row', gap: 14, flex: 1 }}>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='user' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>登录 / 注册 / 我的</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>登录未登录两态切换；前端先校验非空与两次密码一致；成功后 save 再回跳，"我的"页显示昵称与统计。</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='home' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>首页三件套</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>房间切换 + 设备网格 + 环境主卡联动；5 秒轮询保活，切房间设备与环境一起跟着切。</Text>
+            </Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', gap: 14, flex: 1 }}>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='shopping-cart' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>商城闭环</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>商品列表 / 详情 / 购物车 / 订单 / 支付页全流程页面，下单后订单详情可查明细快照。</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='play-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>广告启动页</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>15 秒倒计时、右上角跳过、跳转后销毁不可返回；防死循环用 static 标志（成员变量会随实例销毁重置）。</Text>
+            </Box>
+        </Box>
+        <Box style={{ height: 66, background: '#0E3F8C', borderRadius: 12, flexDirection: 'row', alignItems: 'center', padding: '0 28px', gap: 14 }}>
+            <FAIcon name='exclamation-circle' style={{ fill: '#FFC107', width: 24, height: 24 }} />
+            <Text style={{ fontSize: 19, color: '#FFFFFF', lineHeight: 1.4 }}>我踩的坑：ForEach 的 key 只用 id，轮询在跑界面不刷新 —— 解：key 拼上会变的字段 + slice() 造新数组触发 @State。</Text>
+        </Box>
+    </Box>
+    <Box style={{ width: 1280, height: 58, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>18 / 24</Text>
+    </Box>
+</Slide>

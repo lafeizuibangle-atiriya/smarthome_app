@@ -1,0 +1,51 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'column', background: '#FFFFFF' }}>
+    <Box style={{ width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ width: 1280, height: 78, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40', borderBottom: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>体验兜底：不被 401 与轮询打崩</Text>
+        <Box style={{ background: '#F0F5FC', borderRadius: 16, padding: '5px 16px', border: '1px solid #D6DCE5' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1E4FA8' }}>主讲 · C · 前端框架</Text>
+        </Box>
+    </Box>
+    <Box style={{ flex: 1, padding: '18px 40px 10px 40px', flexDirection: 'column', gap: 14 }}>
+        <Box style={{ flexDirection: 'row', gap: 14, flex: 1 }}>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='shield' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>401 三条纪律</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>只有"本地带 token"的 401 才算过期；判断写在 clear() 之前；同文案 10 秒节流，未登录 401 静默。</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='eye' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>未登录不发请求</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>未登录不起轮询、不拉数据，页面只展示置灰态；登录后由 refreshTick 广播统一刷新。</Text>
+            </Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', gap: 14, flex: 1 }}>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='copy' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>mock 兜底</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>后端模块没完成时，前端用 rawfile/mock 的 JSON 先跑通 UI——前后端不互相等，进度不互相卡。</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='clock' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>轮询生命周期</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>5 秒轮询保活数据；切走 Tab 通过 visible 透传停轮询，回来自动恢复——省流量也防刷屏。</Text>
+            </Box>
+        </Box>
+        <Box style={{ height: 66, background: '#F0F5FC', borderRadius: 12, flexDirection: 'row', alignItems: 'center', padding: '0 28px', gap: 14 }}>
+            <FAIcon name='check-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+            <Text style={{ fontSize: 19, color: '#0E3F8C', lineHeight: 1.4 }}>结果：从联调到答辩演示，没有再出现过一次 401 弹窗刷屏或页面数据错乱。</Text>
+        </Box>
+    </Box>
+    <Box style={{ width: 1280, height: 58, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>17 / 24</Text>
+    </Box>
+</Slide>

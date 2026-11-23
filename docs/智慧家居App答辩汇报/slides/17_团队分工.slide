@@ -1,0 +1,67 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'column', background: '#FFFFFF' }}>
+    <Box style={{ width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ width: 1280, height: 78, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40', borderBottom: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>团队分工：角色制协作 + 组长兜底</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8', letterSpacing: 3 }}>主讲 · 组长</Text>
+    </Box>
+    <Box style={{ flex: 1, padding: '18px 40px 8px 40px', flexDirection: 'column', gap: 12 }}>
+        <Table
+            style={{ width: '100%', flex: 1 }}
+            defaultTextStyle={{ fontSize: 18, textAlign: 'left', color: '#1A2230' }}
+            defaultCellStyle={{
+                border: {
+                    left: { width: 1, color: '#E5E7EB' },
+                    right: { width: 1, color: '#E5E7EB' },
+                    top: { width: 1, color: '#E5E7EB' },
+                    bottom: { width: 1, color: '#E5E7EB' },
+                },
+            }}
+            cells={[
+                [
+                    { text: '成员', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#1E4FA8' } } },
+                    { text: '角色', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#1E4FA8' } } },
+                    { text: '核心负责', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#1E4FA8' } } },
+                    { text: '代表产出', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#1E4FA8' } } },
+                ],
+                [
+                    { text: '组长', textStyle: { bold: true, color: '#0E3F8C' } },
+                    '统筹 / 兜底 / UI 与文档',
+                    '环境统一 · 验收联调 · 卡点处理 · 色板图标与手册',
+                    { text: '17 种设备扩容 · 米家 UI 重做 · SQL 脚本收敛 · 答辩报告与 PPT', textStyle: { color: '#0E3F8C', bold: true } },
+                ],
+                [
+                    { text: 'A', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: '后端架构', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: 'JWT 鉴权链路 · DTO/VO/Mapper/定时任务骨架', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: 'DeviceTypes 字典类 · sanitizeAction 清洗入口 · 4 个定时任务', textStyle: { color: '#0E3F8C', bold: true }, cellStyle: { background: { color: '#F7F9FC' } } },
+                ],
+                [
+                    { text: 'B', textStyle: { bold: true, color: '#0E3F8C' } },
+                    '后端业务',
+                    'User / Device / Room 服务三层（全组最重）',
+                    { text: '17 种控制语义 · 和风天气代理 · 邮箱验证码 · 商城下单事务', textStyle: { color: '#0E3F8C', bold: true } },
+                ],
+                [
+                    { text: 'C', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: '前端框架', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: 'TokenStore / HttpClient / api 层 / 常量字典', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: 'Const 与 DeviceOptions 字典化 · 401 十秒节流 · api 唯一 URL 出口', textStyle: { color: '#0E3F8C', bold: true }, cellStyle: { background: { color: '#F7F9FC' } } },
+                ],
+                [
+                    { text: 'D', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: '前端页面', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: '登录注册 · 首页 · 设备与房间页面', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: '17 种详情面板 · 广告启动页 · 天气面板 · 米家风格 UI 落地', textStyle: { color: '#0E3F8C', bold: true }, cellStyle: { background: { color: '#F7F9FC' } } },
+                ],
+            ]}
+        />
+        <Box style={{ height: 62, background: '#0E3F8C', borderRadius: 12, flexDirection: 'row', alignItems: 'center', padding: '0 28px', gap: 14 }}>
+            <FAIcon name='users' style={{ fill: '#FFC107', width: 24, height: 24 }} />
+            <Text style={{ fontSize: 20, color: '#FFFFFF' }}>工作量均衡：角色按能力分配、负责文件互不交叉，人均每日 4–5 小时；组长兼任 UI 与文档并兜底全局协调。</Text>
+        </Box>
+    </Box>
+    <Box style={{ width: 1280, height: 58, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>06 / 24</Text>
+    </Box>
+</Slide>

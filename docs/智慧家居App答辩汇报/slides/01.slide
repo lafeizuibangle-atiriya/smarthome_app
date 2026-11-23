@@ -1,0 +1,34 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #0E3F8C 0%, #1E4FA8 62%, #2A5FB8 100%)' }}>
+    <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720 }}>
+        <svg width={1280} height={720} viewBox='0 0 1280 720'>
+            <g stroke='#FFFFFF' strokeOpacity='0.14' strokeWidth='2' fill='none'>
+                <circle cx='1080' cy='150' r='180' />
+                <circle cx='1080' cy='150' r='120' />
+                <circle cx='1080' cy='150' r='60' />
+                <path d='M980 620 L1060 550 L1140 620 L1140 690 L980 690 Z' />
+                <path d='M1060 660 L1080 640 L1100 660 M1020 655 L1020 690' />
+                <path d='M120 640 Q320 560 520 640' />
+                <path d='M60 120 Q160 60 260 120' />
+                <path d='M0 700 L1280 700' strokeOpacity='0.08' />
+            </g>
+            <g fill='#FFFFFF' fillOpacity='0.18'>
+                <circle cx='1080' cy='150' r='10' />
+                <circle cx='960' cy='150' r='6' />
+                <circle cx='1200' cy='150' r='6' />
+                <circle cx='1080' cy='30' r='6' />
+                <circle cx='1080' cy='270' r='6' />
+            </g>
+        </svg>
+    </Box>
+    <Box style={{ position: 'absolute', top: 150, left: 80, width: 760, flexDirection: 'column', gap: 26 }}>
+        <Text style={{ fontSize: 20, color: '#BFD4F2', letterSpacing: 6 }}>SMART HOME APPLICATION · COURSE PROJECT</Text>
+        <Text style={{ fontSize: 84, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.15 }}>智慧家居 App</Text>
+        <Text style={{ fontSize: 30, color: '#DCE8FA' }}>仿米家 · 前后端完整闭环的课程实践</Text>
+        <Box style={{ width: 120, height: 4, background: '#FFC107', borderRadius: 2 }} />
+        <Text style={{ fontSize: 22, color: '#BFD4F2', lineHeight: 1.7 }}>HarmonyOS ArkTS 前端  ×  Spring Boot 后端  ×  MySQL 16 表{'\n'}能登录 · 能控设备 · 能看环境 · 能逛商城的完整智慧家居闭环</Text>
+    </Box>
+    <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 64, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 80', borderTop: '1px solid rgba(255,255,255,0.25)' }}>
+        <Text style={{ fontSize: 18, color: '#DCE8FA' }}>汇报人：智慧家居项目小组（5 人）</Text>
+        <Text style={{ fontSize: 18, color: '#DCE8FA' }}>2026 年 9 月</Text>
+    </Box>
+</Slide>

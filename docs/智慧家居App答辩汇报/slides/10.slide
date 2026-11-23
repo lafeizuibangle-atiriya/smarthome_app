@@ -1,0 +1,66 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'column', background: '#FFFFFF' }}>
+    <Box style={{ width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ width: 1280, height: 78, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40', borderBottom: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>语义字段驱动：开关不是发 power</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8', letterSpacing: 3 }}>主讲 · B · 后端业务</Text>
+    </Box>
+    <Box style={{ flex: 1, flexDirection: 'row', gap: 22, padding: '20px 40px 8px 40px' }}>
+        <Box style={{ width: 720, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '18px 26px', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 20px' }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', width: 130 }}>窗帘</Text>
+                <Box style={{ background: '#E8EFF8', borderRadius: 6, padding: '4px 12px' }}><Text style={{ fontSize: 18, color: '#0E3F8C' }}>openPercent = 0</Text></Box>
+                <FAIcon name='arrow-right' style={{ fill: '#1E4FA8', width: 22, height: 22 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#4A5568' }}>power = off</Text>
+                <Text style={{ fontSize: 16, color: '#8B97A8' }}>开合度为 0 就是关</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 20px' }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', width: 130 }}>水泵</Text>
+                <Box style={{ background: '#E8EFF8', borderRadius: 6, padding: '4px 12px' }}><Text style={{ fontSize: 18, color: '#0E3F8C' }}>watering = 1</Text></Box>
+                <FAIcon name='arrow-right' style={{ fill: '#1E4FA8', width: 22, height: 22 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#4A5568' }}>power = on</Text>
+                <Text style={{ fontSize: 16, color: '#8B97A8' }}>浇水中就是开</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #D9534F', borderRadius: 10, padding: '12px 20px' }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', width: 130 }}>门禁</Text>
+                <Box style={{ background: '#FDEDEC', borderRadius: 6, padding: '4px 12px' }}><Text style={{ fontSize: 18, color: '#D9534F' }}>locked = 1</Text></Box>
+                <FAIcon name='arrow-right' style={{ fill: '#D9534F', width: 22, height: 22 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#D9534F' }}>power = off</Text>
+                <Text style={{ fontSize: 16, color: '#8B97A8' }}>反向！上锁 = 关</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 20px' }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', width: 130 }}>油烟机</Text>
+                <Box style={{ background: '#E8EFF8', borderRadius: 6, padding: '4px 12px' }}><Text style={{ fontSize: 18, color: '#0E3F8C' }}>gear = 0</Text></Box>
+                <FAIcon name='arrow-right' style={{ fill: '#1E4FA8', width: 22, height: 22 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#4A5568' }}>power = off</Text>
+                <Text style={{ fontSize: 16, color: '#8B97A8' }}>0 档就是关</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 20px' }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', width: 130 }}>洗衣机</Text>
+                <Box style={{ background: '#E8EFF8', borderRadius: 6, padding: '4px 12px' }}><Text style={{ fontSize: 18, color: '#0E3F8C' }}>running = 1</Text></Box>
+                <FAIcon name='arrow-right' style={{ fill: '#1E4FA8', width: 22, height: 22 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#4A5568' }}>power = on</Text>
+                <Text style={{ fontSize: 16, color: '#8B97A8' }}>并补 remaining 倒计时</Text>
+            </Box>
+        </Box>
+        <Box style={{ flex: 1, flexDirection: 'column', gap: 16 }}>
+            <Box style={{ flex: 1, background: '#0E3F8C', borderRadius: 12, padding: '22px 26px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                    <FAIcon name='exclamation-circle' style={{ fill: '#FFC107', width: 26, height: 26 }} />
+                    <Text style={{ fontSize: 23, fontWeight: 'bold', color: '#FFFFFF' }}>为什么这样设计</Text>
+                </Box>
+                <Text style={{ fontSize: 19, color: '#DCE8FA', lineHeight: 1.7 }}>如果 power 和语义字段各存各的，迟早出现"开关显示开、窗帘开合度却是 0"的矛盾数据 —— 我们真的踩过，只能写数据修复脚本扳正历史数据。</Text>
+            </Box>
+            <Box style={{ height: 170, background: '#F0F5FC', borderRadius: 12, padding: '22px 26px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                    <FAIcon name='check-circle' style={{ fill: '#1E4FA8', width: 26, height: 26 }} />
+                    <Text style={{ fontSize: 23, fontWeight: 'bold', color: '#0E3F8C' }}>带来的收益</Text>
+                </Box>
+                <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.7 }}>联动关系收敛在后端一处；前端永远不用猜状态，发语义字段即可。</Text>
+            </Box>
+        </Box>
+    </Box>
+    <Box style={{ width: 1280, height: 58, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>13 / 24</Text>
+    </Box>
+</Slide>

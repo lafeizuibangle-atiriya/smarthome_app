@@ -1,0 +1,51 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'column', background: '#FFFFFF' }}>
+    <Box style={{ width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ width: 1280, height: 78, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40', borderBottom: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>前端框架底座：页面只管长样子</Text>
+        <Box style={{ background: '#F0F5FC', borderRadius: 16, padding: '5px 16px', border: '1px solid #D6DCE5' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1E4FA8' }}>主讲 · C · 前端框架</Text>
+        </Box>
+    </Box>
+    <Box style={{ flex: 1, padding: '18px 40px 10px 40px', flexDirection: 'column', gap: 14 }}>
+        <Box style={{ flexDirection: 'row', gap: 14, flex: 1 }}>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='lock' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>TokenStore 双存</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>内存 + Preferences 双写，save / clear 后 flush()；杀掉 App 重开仍是已登录。</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='share' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>HttpClient 统一入口</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>泛型 request&lt;T&gt; 自动带 token 头；URL 只出现在 ets/api/，页面禁止直调。</Text>
+            </Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', gap: 14, flex: 1 }}>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='clipboard' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>常量字典收口</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>Const 管常量与字典、Format 管文案；两套选项数组统一在 DeviceOptions 声明，避开 ArkTS 类型坑。</Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 22px' }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <FAIcon name='file-text' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1A2230' }}>接口模型先行</Text>
+                </Box>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>所有请求体 / 返回体先在 model/ 声明 interface；禁裸对象字面量，漏声明直接编译失败。</Text>
+            </Box>
+        </Box>
+        <Box style={{ height: 66, background: '#0E3F8C', borderRadius: 12, flexDirection: 'row', alignItems: 'center', padding: '0 28px', gap: 14 }}>
+            <FAIcon name='exclamation-circle' style={{ fill: '#FFC107', width: 24, height: 24 }} />
+            <Text style={{ fontSize: 19, color: '#FFFFFF', lineHeight: 1.4 }}>我踩的坑：选项数组类型传错、报错行号不在根因处 —— 解：DeviceOptions 统一声明收口，排查先看实参来源再对着报错行。</Text>
+        </Box>
+    </Box>
+    <Box style={{ width: 1280, height: 58, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>16 / 24</Text>
+    </Box>
+</Slide>

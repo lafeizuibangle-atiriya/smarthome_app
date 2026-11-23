@@ -1,0 +1,66 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'column', background: '#FFFFFF' }}>
+    <Box style={{ width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ width: 1280, height: 78, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40', borderBottom: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>踩坑精选：现象 → 根因 → 解决</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8', letterSpacing: 3 }}>主讲 · 组长</Text>
+    </Box>
+    <Box style={{ flex: 1, padding: '20px 40px 8px 40px', flexDirection: 'column', gap: 14 }}>
+        <Table
+            style={{ width: '100%', flex: 1 }}
+            defaultTextStyle={{ fontSize: 18, textAlign: 'left', color: '#1A2230' }}
+            defaultCellStyle={{
+                border: {
+                    left: { width: 1, color: '#E5E7EB' },
+                    right: { width: 1, color: '#E5E7EB' },
+                    top: { width: 1, color: '#E5E7EB' },
+                    bottom: { width: 1, color: '#E5E7EB' },
+                },
+            }}
+            cells={[
+                [
+                    { text: '现象', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#1E4FA8' } } },
+                    { text: '根因', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#1E4FA8' } } },
+                    { text: '解决', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#1E4FA8' } } },
+                ],
+                [
+                    '同类选项数组传错类型，编译失败',
+                    'ArkTS 不做隐式类型兼容（字符串值 / 数值值两套）',
+                    { text: '选项数组统一声明收口；报错行号 ≠ 根因位置', textStyle: { color: '#0E3F8C', bold: true } },
+                ],
+                [
+                    { text: '@Builder 里的 UI 不刷新', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: '按值传参是快照，不是引用', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: '只传数组 + 类别名，选中判断用方法现算', textStyle: { color: '#0E3F8C', bold: true }, cellStyle: { background: { color: '#F7F9FC' } } },
+                ],
+                [
+                    'token 过期后仍然能用',
+                    'Hutool verify() 只验签名不验有效期',
+                    { text: '改用 validate(0) 强制校验有效期', textStyle: { color: '#0E3F8C', bold: true } },
+                ],
+                [
+                    { text: '401 弹窗每分钟刷屏一次', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: '轮询接口反复触发未登录 401', cellStyle: { background: { color: '#F7F9FC' } } },
+                    { text: '同文案 10 秒节流 + 未登录 401 静默', textStyle: { color: '#0E3F8C', bold: true }, cellStyle: { background: { color: '#F7F9FC' } } },
+                ],
+                [
+                    '水量 / 电量可被前端任意伪造',
+                    'status.putAll(action)：前端发什么写什么',
+                    { text: '只读字段清洗丢弃 + 水量改后端按分钟推算', textStyle: { color: '#0E3F8C', bold: true } },
+                ],
+                [
+                    { text: '整库中文变问号且不可逆', cellStyle: { background: { color: '#FDEDEC' } } },
+                    { text: '导入客户端未使用 utf8mb4', cellStyle: { background: { color: '#FDEDEC' } } },
+                    { text: '导入命令写进脚本注释 + verify 做 HEX 校验', textStyle: { color: '#D9534F', bold: true }, cellStyle: { background: { color: '#FDEDEC' } } },
+                ],
+            ]}
+        />
+        <Box style={{ height: 62, background: '#0E3F8C', borderRadius: 12, flexDirection: 'row', alignItems: 'center', padding: '0 28px', gap: 14 }}>
+            <FAIcon name='wrench' style={{ fill: '#FFC107', width: 24, height: 24 }} />
+            <Text style={{ fontSize: 20, color: '#FFFFFF' }}>9 个坑全部沉淀为文档规则与自动化工具（db_tool.py / 自测脚本），同类问题不再复发。</Text>
+        </Box>
+    </Box>
+    <Box style={{ width: 1280, height: 58, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '0 40' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>智慧家居 App（仿米家）· 课程结项答辩</Text>
+        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1E4FA8' }}>21 / 24</Text>
+    </Box>
+</Slide>

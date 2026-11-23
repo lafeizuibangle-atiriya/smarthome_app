@@ -1,0 +1,27 @@
+# ---- Java / Maven ----
+smarthome_server/target/
+*.class
+*.jar
+
+# ---- IDE ----
+.idea/
+*.iml
+
+# ---- HarmonyOS / DevEco ----
+oh_modules/
+build/
+.hvigor/
+local.properties
+.cxx/
+
+# ---- 系统与日志 ----
+.DS_Store
+*.log
+
+# ---- 敏感配置（真实秘钥不入库，见 application.example.yml）----
+smarthome_server/src/main/resources/application.yml
+
+# ---- 调试临时文件 ----
+_*.txt
+.scan/
+.workbuddy-*

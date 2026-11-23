@@ -1,0 +1,64 @@
+<Slide style={{ width: 1280, height: 720, padding: 0, flexDirection: 'row', background: '#FFFFFF' }}>
+    <Box style={{ width: 340, height: 720, background: '#0E3F8C', justifyContent: 'center', padding: '0 56' }}>
+        <Box style={{ width: 56, height: 6, background: '#FFC107', borderRadius: 3, marginBottom: 28 }} />
+        <Text style={{ fontSize: 58, fontWeight: 'bold', color: '#FFFFFF', marginBottom: 18 }}>讲述安排</Text>
+        <Text style={{ fontSize: 20, color: '#BFD4F2', letterSpacing: 5 }}>PRESENTATION PLAN</Text>
+        <Text style={{ fontSize: 18, color: '#BFD4F2', marginTop: 28, lineHeight: 1.7 }}>五人全员轮流主讲：每人一个章节、每人都有自己的坑与解决，组长开场收尾并串场。</Text>
+        <Box style={{ marginTop: 26, background: '#1E4FA8', borderRadius: 12, padding: '14px 20px', border: '1px solid #3D7BD9' }}>
+            <Text style={{ fontSize: 18, color: '#FFC107', fontWeight: 'bold' }}>总时长 18–30 分钟</Text>
+            <Text style={{ fontSize: 16, color: '#DCE8FA', marginTop: 6, lineHeight: 1.6 }}>含真机演示环节，每人 4–5 分钟。</Text>
+        </Box>
+    </Box>
+    <Box style={{ flex: 1, height: 720, justifyContent: 'center', padding: '0 52', gap: 20 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 18 }}>
+            <Box style={{ width: 58, height: 58, background: '#E8EFF8', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1E4FA8' }}>01</Text>
+            </Box>
+            <Box style={{ flexDirection: 'column', gap: 5, flex: 1 }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1A2230' }}>项目总览与分工</Text>
+                <Text style={{ fontSize: 17, color: '#8B97A8' }}>数据规模 · 系统架构 · 团队分工表</Text>
+            </Box>
+            <Box style={{ background: '#0E3F8C', borderRadius: 16, padding: '6px 16px' }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>主讲 · 组长</Text></Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 18 }}>
+            <Box style={{ width: 58, height: 58, background: '#E8EFF8', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1E4FA8' }}>02</Text>
+            </Box>
+            <Box style={{ flexDirection: 'column', gap: 5, flex: 1 }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1A2230' }}>后端架构与安全</Text>
+                <Text style={{ fontSize: 17, color: '#8B97A8' }}>指令清洗 · 字典化与定时 · 账号与环境链路</Text>
+            </Box>
+            <Box style={{ background: '#1E4FA8', borderRadius: 16, padding: '6px 16px' }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>主讲 · A</Text></Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 18 }}>
+            <Box style={{ width: 58, height: 58, background: '#E8EFF8', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1E4FA8' }}>03</Text>
+            </Box>
+            <Box style={{ flexDirection: 'column', gap: 5, flex: 1 }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1A2230' }}>后端业务与设备语义</Text>
+                <Text style={{ fontSize: 17, color: '#8B97A8' }}>17 种设备 · 语义字段驱动 · 三方与商城</Text>
+            </Box>
+            <Box style={{ background: '#1E4FA8', borderRadius: 16, padding: '6px 16px' }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>主讲 · B</Text></Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 18 }}>
+            <Box style={{ width: 58, height: 58, background: '#E8EFF8', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1E4FA8' }}>04</Text>
+            </Box>
+            <Box style={{ flexDirection: 'column', gap: 5, flex: 1 }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1A2230' }}>前端实现</Text>
+                <Text style={{ fontSize: 17, color: '#8B97A8' }}>框架底座 · 体验兜底 · 页面体系 · 米家 UI</Text>
+            </Box>
+            <Box style={{ background: '#1E4FA8', borderRadius: 16, padding: '6px 16px' }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>主讲 · C / D</Text></Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 18 }}>
+            <Box style={{ width: 58, height: 58, background: '#E8EFF8', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1E4FA8' }}>05</Text>
+            </Box>
+            <Box style={{ flexDirection: 'column', gap: 5, flex: 1 }}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#1A2230' }}>踩坑验证与展望</Text>
+                <Text style={{ fontSize: 17, color: '#8B97A8' }}>踩坑总表 · 每人一坑 · 验证结论与未来工作</Text>
+            </Box>
+            <Box style={{ background: '#0E3F8C', borderRadius: 16, padding: '6px 16px' }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>主讲 · 组长</Text></Box>
+        </Box>
+    </Box>
+</Slide>

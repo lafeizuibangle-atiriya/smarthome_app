@@ -1,0 +1,4 @@
+# 设备模拟器依赖
+# 只需要 requests；装的时候走国内镜像会快很多：
+#   pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+requests>=2.31.0
