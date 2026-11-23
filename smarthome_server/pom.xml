@@ -25,6 +25,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- 监控端点（/actuator/health 健康检查 + /actuator/prometheus 指标暴露，2026-11-23 容器化监控用） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
         <!-- Validation：DTO 参数校验（@NotBlank/@Min/@Email + Controller @Valid，2026-11-23） -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

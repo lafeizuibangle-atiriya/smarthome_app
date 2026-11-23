@@ -25,3 +25,9 @@ smarthome_server/src/main/resources/application.yml
 _*.txt
 .scan/
 .workbuddy-*
+
+# ---- Python 接口测试产物 ----
+test_api/report/
+test_api/.pytest_cache/
+__pycache__/
+*.pyc

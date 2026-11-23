@@ -1,9 +1,11 @@
 package com.smarthome.controller;
 
 import com.smarthome.common.Result;
+import com.smarthome.dto.RoomDTO;
 import com.smarthome.entity.Room;
 import com.smarthome.service.DeviceService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,14 +27,10 @@ public class RoomController {
         return Result.ok(deviceService.roomList(userId(request)));
     }
 
-    /** 新增房间：body 形如 {"name":"书房"} */
+    /** 新增房间：body 形如 {"name":"书房"}；2026-11-23 改用 @Valid RoomDTO 走统一参数校验（接口测试发现原来 @Size(max=10) 未生效） */
     @PostMapping
-    public Result<Void> add(@RequestBody Map<String, Object> body, HttpServletRequest request) {
-        Object name = body.get("name");
-        if (name == null || name.toString().isEmpty()) {
-            return Result.error(400, "房间名不能为空");
-        }
-        deviceService.addRoom(name.toString(), userId(request));
+    public Result<Void> add(@Valid @RequestBody RoomDTO dto, HttpServletRequest request) {
+        deviceService.addRoom(dto.getName(), userId(request));
         return Result.ok();
     }
 

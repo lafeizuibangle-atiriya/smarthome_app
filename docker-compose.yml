@@ -1,0 +1,104 @@
+# ============================================================
+# 智慧家居后端一键编排：MySQL + Redis + App + Prometheus + Grafana
+#
+# 启动全部：   docker compose up -d
+# 只起核心三个（不搭监控）：
+#   docker compose up -d mysql redis app
+# 停止：       docker compose down          （数据卷保留）
+# 连数据卷一起删：docker compose down -v
+#
+# 首次启动 MySQL 会自动执行 ../Mysql/init_all.sql 建库+灌演示数据（demo/123456）。
+# App 访问地址：http://localhost:8080
+# Grafana：    http://localhost:3000 （admin/admin，首次登录后改密码）
+# Prometheus： http://localhost:9090
+# ============================================================
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: smarthome-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: smart_home
+      TZ: Asia/Shanghai
+    # 首次建库自动导入完整演示数据（demo/123456，16 张表）
+    volumes:
+      - ../Mysql/init_all.sql:/docker-entrypoint-initdb.d/init_all.sql:ro
+      - mysql_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"                    # 主机 3306 已有本地 MySQL 时，把这行改成 "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - smarthome
+
+  redis:
+    image: redis:7-alpine
+    container_name: smarthome-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - smarthome
+
+  app:
+    build: ./smarthome_server
+    image: smarthome-server:1.0
+    container_name: smarthome-app
+    environment:
+      # 容器网络里用服务名互访，不是 localhost
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: "123456"
+      REDIS_HOST: redis
+      TZ: Asia/Shanghai
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy      # 等 MySQL 真正可连接再启动
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - smarthome
+
+  # ---------- 监控（可选，不需要时只 up 前三个服务） ----------
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: smarthome-prometheus
+    volumes:
+      - ./smarthome_server/deploy/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - smarthome
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: smarthome-grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin  # 首次登录 admin/admin
+      TZ: Asia/Shanghai
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - smarthome
+
+volumes:
+  mysql_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  smarthome:
+    driver: bridge

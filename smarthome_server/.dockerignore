@@ -1,0 +1,6 @@
+target/
+.idea/
+*.iml
+*.log
+_boot*.txt
+_*.txt
