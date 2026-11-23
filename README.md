@@ -1,8 +1,14 @@
 # 米家风格智慧家居 App
 
+![HarmonyOS](https://img.shields.io/badge/HarmonyOS-Next-0A59F7)
+![ArkTS](https://img.shields.io/badge/ArkTS-5-lime)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.4-6db33f)
+![MySQL](https://img.shields.io/badge/MySQL-8-4479a1)
+![MyBatis-Plus](https://img.shields.io/badge/MyBatis--Plus-3.5.7-blue)
+
 > 技术栈：HarmonyOS ArkTS（ArkUI）｜ Spring Boot 3.3.4 ｜ MySQL 8 ｜ MyBatis-Plus 3.5.7
 > 前端 23 个页面 + 8 个组件，后端 12 个 Controller / 54 个接口 / 4 个定时任务，数据库 16 张表；
-> **能力闭环**：登录注册 → 房间与 17 种设备（含环境监测、定时任务）→ 场景自动化 → 产品库 → 商城下单。
+> **完整流程**：登录注册 → 房间与 17 种设备（含环境监测、定时任务）→ 场景自动化 → 产品库 → 商城下单。
 > 配套文档在 `docs/` 目录，**动手前先读对应章节**。
 
 ---
@@ -31,7 +37,7 @@ smarthome_project/
 │       ├── aspect/         # OpLogAspect（写操作自动落操作日志）
 │       └── task/           # 4 个定时任务（SensorSim / SceneTimed / WaterTimed / DeviceTimed）
 ├── docs/
-│   ├── 01_总方案.md        # 页面清单、接口清单、UI 规范、踩坑记录（先读第七/十一章）
+│   ├── 01_总方案.md        # 页面清单、接口清单、UI 规范、问题记录（先读第七/十一章）
 │   ├── 02_开发手册_前端.md  # ArkTS 页面代码模板（先读 5.0 节）
 │   ├── 02_开发手册_后端.md  # Spring Boot 三层代码模板
 │   ├── 03_接口文档.md      # 前后端契约 + 命名规范（改接口必须先改这里）
@@ -121,9 +127,9 @@ cd smarthome_app
 | 路由表 `main_pages.json`、网络权限 | 前端 `TokenStore`、`HttpClient`、`Format` |
 | 3 个定时任务类壳 | 全部 model / api / view / pages |
 
-**每个骨架文件的注释里都写了**：这一步做什么、参考哪份文档哪一节、有哪些坑。照着 TODO 一条条来即可。
+**每个骨架文件的注释里都写了**：这一步做什么、参考哪份文档哪一节、有哪些注意事项。照着 TODO 一条条来即可。
 
-**通用纪律**（总方案 7.8 + 十一章，16 条踩坑都是真的）：
+**通用纪律**（总方案 7.8 + 十一章，16 条经验都来自实际调试）：
 
 1. 目录/文件只用下划线 `_`，绝不用连字符；
 2. 改完先 Ctrl+S（看标签页 `*` 号消失）再谈重启；
@@ -145,7 +151,7 @@ cd smarthome_app
 | ② 设备主链路（里程碑） | Room/Device 三层 + control 状态合并 + 环境监测接口 + `SensorSimTask` | 首页 + `EnvironmentPanel` + 设备详情 + 添加设备 + 房间管理 | 后端手册四章；前端手册 6.1–6.4 |
 | ③ 智能场景 | Scene 三层 + run 事务 + `SceneTimedTask` | 智能页 + 场景编辑 + 自动化详情 | 后端手册五章 |
 | ④ 产品库 | Product 三层 + 初始化数据 | 产品页 + 产品详情（去商城跳转） | 后端手册六章 |
-| ⑤ 商城闭环（里程碑） | Goods/Cart/Order 三层 + 模拟支付 | 商城页 + 详情 + 购物车 + 订单三页 + 支付两页 | 后端手册七章 |
+| ⑤ 商城流程（里程碑） | Goods/Cart/Order 三层 + 模拟支付 | 商城页 + 详情 + 购物车 + 订单三页 + 支付两页 | 后端手册七章 |
 | ⑥ 打磨交付 | 补数据、修 Bug | UI 统一、空态、录视频 | 总方案九/十章 |
 
 > 建议节奏：每个阶段**后端先 Apifox/curl 自测通过**，前端再接——curl 自测命令见后端手册 1.7 节。
