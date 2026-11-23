@@ -10,13 +10,14 @@
 > 前端 23 个页面 + 8 个组件，后端 12 个 Controller / 54 个接口 / 4 个定时任务，数据库 16 张表；
 > **完整流程**：登录注册 → 房间与 17 种设备（含环境监测、定时任务）→ 场景自动化 → 产品库 → 商城下单。
 > 配套文档在 `docs/` 目录，**动手前先读对应章节**。
+> 硬件固件仓库：`smarthome_firmware`（STM32L431 + ESP8285 + MQTT）。
 
 ---
 
 ## 一、目录结构
 
 ```text
-smarthome_project/
+smarthome_app/
 ├── smarthome_app/          # 前端（DevEco Studio 工程）
 │   └── entry/src/main/ets/
 │       ├── pages/          # 23 个页面文件（Index 启动页 + AdPage 广告页 + 5 个 Tab 页 + 16 个子页）
@@ -61,7 +62,7 @@ smarthome_project/
 cmd /c "mysql -u root -p --default-character-set=utf8mb4 < Mysql\init_all.sql"
 
 :: 或进 mysql 后（先执行 SET NAMES utf8mb4;）
-mysql> source D:/Code/smarthome_project/Mysql/init_all.sql
+mysql> source <项目目录>/Mysql/init_all.sql
 
 :: 或用 Navicat「运行 SQL 文件」（最省事，连接编码选 utf8mb4）
 ```
