@@ -33,6 +33,22 @@ public class LlmClient {
     @Value("${llm.api.timeout-seconds:20}")
     private int timeoutSeconds;
 
+    /**
+     * 启动时打一条启用状态——2026-11-24 排查发现 key 走环境变量后，
+     * 环境变量没注入时助手会静默退化成兜底模式，没日志根本看不出原因。
+     */
+    @jakarta.annotation.PostConstruct
+    void logStartupState() {
+        if (enabled()) {
+            org.slf4j.LoggerFactory.getLogger(LlmClient.class)
+                    .info("[智能助手] LLM 已启用，model={}（key 来自环境变量 LLM_API_KEY）", model);
+        } else {
+            org.slf4j.LoggerFactory.getLogger(LlmClient.class)
+                    .warn("[智能助手] 未配置 LLM_API_KEY 环境变量，助手退化为纯规则+FAQ 兜底模式，"
+                            + "自然语言控制设备不可用");
+        }
+    }
+
     /** 是否已配置 API Key（决定走大模型还是纯规则） */
     public boolean enabled() {
         return apiKey != null && !apiKey.isBlank();

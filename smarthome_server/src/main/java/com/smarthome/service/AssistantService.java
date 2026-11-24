@@ -13,6 +13,9 @@ import com.smarthome.mapper.RoomMapper;
 import com.smarthome.vo.DeviceVO;
 import com.smarthome.vo.HomeOverviewVO;
 import com.smarthome.vo.RoomEnvironmentVO;
+import com.smarthome.vo.WeatherAirVO;
+import com.smarthome.vo.WeatherNowVO;
+import com.smarthome.vo.WeatherWarningVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -43,6 +46,7 @@ public class AssistantService {
 
     private final LlmClient llmClient;
     private final DeviceService deviceService;
+    private final WeatherService weatherService;
     private final DeviceMapper deviceMapper;
     private final RoomMapper roomMapper;
 
@@ -108,9 +112,30 @@ public class AssistantService {
         Integer power = parsePower(question);
         String type = parseDeviceType(question);
         if (power == null || type == null) {
+            // 意愿直答（2026-11-24）：嫌暗/嫌热这类没点名设备的意愿，按对照表直接执行。
+            // 2026-11-24 实测 glm-4-flash 遇到这类输入经常反问"需要打开吗"或编造执行，
+            // 所以把意愿推断从模型手里拿回来放进规则层，100% 稳定。
+            // 疑问句不套用（"怎么让房间变暗"不是开灯指令）
+            if (!looksLikeQuestion(question)) {
+                String intentType = mapIntentType(question);
+                if (intentType != null) {
+                    Integer intentPower = mapIntentPower(question, intentType);
+                    if (intentPower != null) {
+                        return execDevice(userId, intentType, intentPower, null);
+                    }
+                }
+            }
             return null;
         }
         Room room = parseRoom(userId, question);   // 可为 null：不带房间名就全屋找第一台
+        return execDevice(userId, type, power, room);
+    }
+
+    /**
+     * 执行"打开/关闭某类型设备"并生成回复。room 为 null 时全屋找第一台。
+     * 规则层标准指令与意愿直答共用这一个出口，行为一致（含离线防护）。
+     */
+    private String execDevice(Long userId, String type, Integer power, Room room) {
         Device device = findDevice(userId, room == null ? null : room.getId(), type);
         if (device == null) {
             String where = room == null ? "全屋" : room.getName();
@@ -125,6 +150,45 @@ public class AssistantService {
         deviceService.control(device.getId(), userId, Map.of("power", power == 1 ? "on" : "off"));
         String roomName = roomNameOf(userId, device.getRoomId());
         return "已" + (power == 1 ? "打开" : "关闭") + prettyDeviceName(roomName, device.getName()) + "。";
+    }
+
+    /** 疑问句判断：带疑问词的不套用意愿对照表（"怎么让房间变暗"不是开灯指令） */
+    private boolean looksLikeQuestion(String q) {
+        return q.contains("吗") || q.contains("？") || q.contains("?")
+                || q.contains("怎么") || q.contains("什么") || q.contains("哪些")
+                || q.contains("为什么") || q.contains("如何");
+    }
+
+    /**
+     * 意愿关键词 → 设备类型（与 system prompt 里的"意愿→设备对照表"同一套规则）。
+     * 对照不上返回 null。
+     */
+    private String mapIntentType(String q) {
+        if (q.contains("热") || q.contains("闷") || q.contains("通风")
+                || q.contains("冷")) return DeviceTypes.FAN;
+        if (q.contains("暗") || q.contains("黑") || q.contains("刺眼")) return DeviceTypes.LIGHT;
+        if (q.contains("吵") || q.contains("噪")) return DeviceTypes.BEEP;
+        if (q.contains("出门") || q.contains("离家") || q.contains("回家") || q.contains("进门")) {
+            return DeviceTypes.GATE;
+        }
+        return null;
+    }
+
+    /** 意愿关键词 → 开(1)/关(0)，对照不上返回 null */
+    private Integer mapIntentPower(String q, String type) {
+        if (DeviceTypes.FAN.equals(type)) {
+            if (q.contains("热") || q.contains("闷") || q.contains("通风")) return 1;
+            if (q.contains("冷")) return 0;
+        } else if (DeviceTypes.LIGHT.equals(type)) {
+            if (q.contains("暗") || q.contains("黑")) return 1;
+            if (q.contains("刺眼")) return 0;
+        } else if (DeviceTypes.BEEP.equals(type)) {
+            if (q.contains("吵") || q.contains("噪")) return 0;
+        } else if (DeviceTypes.GATE.equals(type)) {
+            if (q.contains("出门") || q.contains("离家")) return 0;
+            if (q.contains("回家") || q.contains("进门")) return 1;
+        }
+        return null;
     }
 
     /** 从句子里解析开(1)/关(0)，解析不出返回 null */
@@ -188,6 +252,9 @@ public class AssistantService {
             for (int round = 0; round < MAX_TOOL_ROUNDS; round++) {
                 JSONObject msg = llmClient.chatCompletion(messages, tools);
                 JSONArray toolCalls = msg.getJSONArray("tool_calls");
+                log.info("[助手调试] attempt={} round={} toolCalls={} content={}",
+                        attempt, round, toolCalls == null ? 0 : toolCalls.size(),
+                        msg.getStr("content", ""));
                 if (toolCalls == null || toolCalls.isEmpty()) {
                     String text = msg.getStr("content", "");
                     content = text.isBlank() ? "这个问题我暂时答不上来。" : text;
@@ -201,6 +268,8 @@ public class AssistantService {
                     JSONObject fn = call.getJSONObject("function");
                     String result = execTool(userId, fn.getStr("name"),
                             JSONUtil.parseObj(fn.getStr("arguments", "{}")));
+                    log.info("[助手调试] 工具调用 name={} args={} result={}",
+                            fn.getStr("name"), fn.getStr("arguments"), result);
                     // 成功的执行以"已xxx"开头（失败以"错误："/"执行失败："开头）
                     if (result.startsWith("已")) {
                         executed = true;
@@ -214,18 +283,41 @@ public class AssistantService {
             }
 
             if (executed || !ACTION_CLAIM.matcher(content).find()) {
+                log.info("[助手调试] 判定通过 executed={} content={}", executed, content);
                 appendExecutedToMessages(messages, content);
                 return content;
             }
+            log.warn("[助手调试] 判定为编造，重试 executed={} content={}", executed, content);
 
             // 声称了操作但没真正执行（没调工具，或调了但工具返回失败）→ 纠正后重试
             messages.add(Map.of("role", "system", "content",
                     "你的上一条回复声称执行了设备操作，但本轮没有任何一次成功的工具执行"
                     + "（工具要么没被调用，要么返回了失败/离线信息），这是编造。"
                     + "请重新回答：要操作设备就必须调用工具并确认工具返回了成功；"
-                    + "无法操作（如设备离线、设备不存在）就如实说明原因，不要声称已执行。"));
+                    +                     "无法操作（如设备离线、设备不存在）就如实说明原因，不要声称已执行。"));
         }
-        return "我没能完成这个操作。请明确说要打开或关闭哪台设备（例如：打开客厅的灯）。";
+        // 模型连续两轮编造也没救回来：Java 侧按意愿对照表直接执行，保证演示指令稳定生效
+        String fuzzy = fuzzyIntentReply(userId, question);
+        return fuzzy != null ? fuzzy
+                : "我没能完成这个操作。请明确说要打开或关闭哪台设备（例如：打开客厅的灯）。";
+    }
+
+    /**
+     * Java 侧意愿兜底（2026-11-24）：意愿直答已前移到规则层（tryRuleReply），
+     * 这里只处理"模型被判编造后重试仍失败"的残余场景，规则同上。
+     * 对照不上返回 null（维持原失败话术，不乱猜）。
+     */
+    private String fuzzyIntentReply(Long userId, String question) {
+        String type = mapIntentType(question);
+        if (type == null || looksLikeQuestion(question)) {
+            return null;
+        }
+        Integer power = mapIntentPower(question, type);
+        if (power == null) {
+            return null;
+        }
+        log.info("[助手调试] 意图兜底直接执行 type={} power={}", type, power);
+        return execDevice(userId, type, power, null);
     }
 
     /**
@@ -256,6 +348,12 @@ public class AssistantService {
           .append("3. 每次回复只描述真实执行过的操作，没执行工具就说没执行。\n");
         sb.append("只能操作用户名下真实存在的设备；参数校验不通过时如实告知用户。\n\n");
         sb.append("【当前家庭状态（实时）】\n").append(homeStatusText(userId)).append("\n");
+        // 实时天气 + 空气质量（2026-11-24 新增）：模型此前不知道天气，答"无法提供"；
+        // 数据来自和风代理（后端 10 分钟缓存），取失败不影响助手其他能力
+        String weatherText = weatherText();
+        if (!weatherText.isEmpty()) {
+            sb.append("【当前室外天气（").append("默认城市").append("）】").append(weatherText).append("\n");
+        }
         sb.append("【自动模式联动规则】天黑自动开灯；温度偏高自动开风扇；检测到人自动开门；")
           .append("烟雾报警时蜂鸣器鸣响并开风扇（任何模式下都生效）。手动模式不联动。\n");
         sb.append("【常见问题】\n")
@@ -265,9 +363,49 @@ public class AssistantService {
         return sb.toString();
     }
 
+    /**
+     * 拼室外天气一段话（天气 + 空气质量 + 生效预警）。
+     * 任何失败都返回空串——天气是锦上添花，不能因为它把整个助手搞挂。
+     */
+    private String weatherText() {
+        try {
+            WeatherNowVO now = weatherService.now(null);
+            if (now == null) {
+                return "";
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append(now.getCityName() == null ? "" : now.getCityName())
+              .append(" ").append(now.getText())
+              .append("，").append(now.getTemp()).append("℃")
+              .append("（体感 ").append(now.getFeelsLike()).append("℃）")
+              .append("，").append(now.getWindDir()).append(" ").append(now.getWindScale()).append("级")
+              .append("，湿度 ").append(now.getHumidity()).append("%");
+            try {
+                WeatherAirVO air = weatherService.air(null);
+                if (air != null && air.getCategory() != null) {
+                    sb.append("；空气质量").append(air.getCategory())
+                      .append("，AQI ").append(air.getAqi())
+                      .append("，PM2.5 ").append(air.getPm2p5());
+                }
+            } catch (Exception ignore) { /* 空气质量拿不到就算了 */ }
+            try {
+                List<WeatherWarningVO> ws = weatherService.warnings(null);
+                if (ws != null && !ws.isEmpty()) {
+                    sb.append("；当前生效预警：");
+                    for (WeatherWarningVO w : ws) {
+                        sb.append("[").append(w.getTitle()).append("] ");
+                    }
+                }
+            } catch (Exception ignore) { /* 预警拿不到就算了 */ }
+            return sb.toString();
+        } catch (Exception e) {
+            log.warn("助手拼装天气上下文失败: {}", e.getMessage());
+            return "";
+        }
+    }
+
     /** 把数据库里的家庭状态拼成模型能读的文本 */
-    private String homeStatusText(Long userId) {
-        HomeOverviewVO ov = deviceService.overview(userId);
+    private String homeStatusText(Long userId) {        HomeOverviewVO ov = deviceService.overview(userId);
         StringBuilder sb = new StringBuilder();
         sb.append("全屋模式：").append("AUTO".equals(ov.getMode()) ? "自动" : "手动").append("。");
         for (Room room : ov.getRooms()) {
