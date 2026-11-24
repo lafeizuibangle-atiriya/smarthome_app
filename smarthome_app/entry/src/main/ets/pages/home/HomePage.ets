@@ -179,6 +179,19 @@ export struct HomePage {
           .fontColor(Const.TEXT_MAIN)
         Text('▾').fontSize(14).fontColor(Const.TEXT_SUB).margin({ top: 8 })
         Blank()
+        // AI 助手入口（2026-11-23 新增）：对话查状态、自然语言控设备
+        Text('✦')
+          .fontSize(20).fontColor(Const.BRAND_BLUE)
+          .width(38).height(38).textAlign(TextAlign.Center)
+          .backgroundColor(Const.BRAND_BLUE_LIGHT).borderRadius(19)
+          .margin({ right: 10 })
+          .onClick(() => {
+            if (!TokenStore.isLogin()) {
+              router.pushUrl({ url: 'pages/login/LoginPage' })
+              return
+            }
+            router.pushUrl({ url: 'pages/smart/AssistantPage' })
+          })
         Text('+')
           .fontSize(22).fontColor(Const.TEXT_MAIN)
           .width(38).height(38).textAlign(TextAlign.Center)

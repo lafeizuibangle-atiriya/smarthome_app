@@ -4,7 +4,7 @@
 //       【未登录不发请求】；【Tabs 子页切走要停表】（visible 由 HomePage 传入）。
 import { promptAction } from '@kit.ArkUI'
 import { WeatherApi } from '../api/WeatherApi'
-import { WeatherNow, WeatherCity } from '../model/Weather'
+import { WeatherNow, WeatherCity, WeatherAir, WeatherWarning } from '../model/Weather'
 import { Const } from '../common/Const'
 import { TokenStore } from '../common/TokenStore'
 
@@ -18,6 +18,8 @@ interface MetricItem {
 @Component
 export struct WeatherPanel {
   @State weather: WeatherNow | null = null
+  @State air: WeatherAir | null = null            // 空气质量（2026-11-23 新增）
+  @State warnings: WeatherWarning[] = []          // 当前生效的气象预警（2026-11-23 新增）
   @State cities: WeatherCity[] = []
   @State currentCityId: string = ''          // 空串 = 后端默认城市（南昌）
   @State currentCityName: string = '南昌'
@@ -112,6 +114,19 @@ export struct WeatherPanel {
         this.scheduleRetry()
       }
       // 失败不弹窗：天气是辅助信息（手册 4.3.2 节流原则），靠"点击重试"+自动重试兜底
+
+      // 【2026-11-23 新增】空气质量和预警随实况一起刷。
+      // 两者都是"锦上添花"数据：失败了不打扰主天气展示，静默保留旧值/空列表。
+      const airRes = await WeatherApi.air(this.currentCityId)
+      if (airRes.code === 200 && airRes.data) {
+        this.air = airRes.data
+      }
+      const warnRes = await WeatherApi.warning(this.currentCityId)
+      if (warnRes.code === 200 && warnRes.data) {
+        this.warnings = warnRes.data
+      } else {
+        this.warnings = []
+      }
     } finally {
       this.loading = false
     }
@@ -221,6 +236,28 @@ export struct WeatherPanel {
           .fontSize(10).fontColor('rgba(255,255,255,0.7)')
       }.width('100%')
 
+      // ---------- 气象预警横幅（2026-11-23 新增，无预警不占位）----------
+      // 现在就显示"预警生效中"最直观；文字用 title（发布单位+时间+等级一句话全有）
+      if (this.warnings.length > 0) {
+        Column({ space: 3 }) {
+          ForEach(this.warnings, (w: WeatherWarning, index: number) => {
+            Row({ space: 6 }) {
+              Text('⚠').fontSize(13)
+              Text(w.title)
+                .fontSize(11).fontColor(Color.White)
+                .maxLines(2)
+                .textOverflow({ overflow: TextOverflow.Ellipsis })
+                .layoutWeight(1)
+            }
+            .width('100%')
+            .padding({ left: 10, right: 10, top: 7, bottom: 7 })
+            .backgroundColor('rgba(255,180,60,0.35)')
+            .borderRadius(10)
+          }, (w: WeatherWarning, index: number) => `${w.id}_${index}`)
+        }
+        .width('100%')
+      }
+
       // ---------- 第二行：大温度 + 天气现象 ----------
       Row({ space: 12 }) {
         Text(this.weatherEmoji()).fontSize(40)
@@ -264,6 +301,21 @@ export struct WeatherPanel {
       .columnsTemplate('1fr 1fr 1fr 1fr')
       .rowsGap(8)
       .height(84)
+
+      // ---------- 空气质量行（2026-11-23 新增）：AQI + 类别 + PM2.5/PM10 ----------
+      if (this.air !== null) {
+        Row({ space: 6 }) {
+          Text('🫁').fontSize(13)
+          Text(`空气质量 ${this.air.category}`)
+            .fontSize(12).fontWeight(FontWeight.Medium).fontColor(Color.White)
+          Text(`AQI ${this.air.aqi} · PM2.5 ${this.air.pm2p5} · PM10 ${this.air.pm10}`)
+            .fontSize(10).fontColor('rgba(255,255,255,0.75)')
+            .layoutWeight(1)
+            .maxLines(1)
+            .textAlign(TextAlign.End)
+        }
+        .width('100%')
+      }
 
       // ---------- 观测时间脚注 ----------
       Text(`观测时间 ${this.weather === null ? '--' : this.shortTime(this.weather.obsTime)}`)

@@ -97,7 +97,9 @@ export class HttpClient {
    *             不能直接传裸字面量 —— 那是 ArkTS 严格模式的硬要求。
    */
   private static async request<T>(method: http.RequestMethod, path: string,
-                                  body?: object): Promise<ApiResponse<T>> {
+                                  body?: object, timeoutMs?: number): Promise<ApiResponse<T>> {
+    // 普通接口 8 秒；大模型对话等慢接口由调用方传更长超时（如 30 秒）
+    const timeout: number = timeoutMs === undefined ? 8000 : timeoutMs
     const client: http.HttpRequest = http.createHttp()
     try {
       // 1. 组装请求头：有 token 就带上（后端拦截器靠它识别用户）
@@ -113,8 +115,8 @@ export class HttpClient {
         method: method,
         header: header,
         extraData: body === undefined ? undefined : JSON.stringify(body),
-        connectTimeout: 8000,      // 连接超时 8 秒
-        readTimeout: 8000
+        connectTimeout: timeout,      // 连接超时
+        readTimeout: timeout
       }
 
       // 3. 发请求
@@ -165,6 +167,11 @@ export class HttpClient {
 
   static post<T>(path: string, body?: object): Promise<ApiResponse<T>> {
     return HttpClient.request<T>(http.RequestMethod.POST, path, body)
+  }
+
+  /** 长超时 POST（30 秒）：智能助手等大模型接口专用，回答要等好几秒 */
+  static postLong<T>(path: string, body?: object): Promise<ApiResponse<T>> {
+    return HttpClient.request<T>(http.RequestMethod.POST, path, body, 30000)
   }
 
   static put<T>(path: string, body?: object): Promise<ApiResponse<T>> {
