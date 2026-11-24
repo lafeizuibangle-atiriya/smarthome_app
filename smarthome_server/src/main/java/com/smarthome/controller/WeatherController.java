@@ -2,7 +2,9 @@ package com.smarthome.controller;
 
 import com.smarthome.common.Result;
 import com.smarthome.service.WeatherService;
+import com.smarthome.vo.WeatherAirVO;
 import com.smarthome.vo.WeatherNowVO;
+import com.smarthome.vo.WeatherWarningVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,5 +43,17 @@ public class WeatherController {
     @GetMapping("/cities")
     public Result<List<Map<String, String>>> cities() {
         return Result.ok(weatherService.cities());
+    }
+
+    /** 空气质量 AQI（2026-11-23 新增）：location 可空（默认南昌） */
+    @GetMapping("/air")
+    public Result<WeatherAirVO> air(@RequestParam(required = false) String location) {
+        return Result.ok(weatherService.air(location));
+    }
+
+    /** 当前生效的气象预警列表（2026-11-23 新增），无预警返回空数组 */
+    @GetMapping("/warning")
+    public Result<List<WeatherWarningVO>> warning(@RequestParam(required = false) String location) {
+        return Result.ok(weatherService.warnings(location));
     }
 }

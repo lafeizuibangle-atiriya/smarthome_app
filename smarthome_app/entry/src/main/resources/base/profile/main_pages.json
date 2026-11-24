@@ -9,6 +9,7 @@
     "pages/device/AddDevicePage",
     "pages/smart/SceneEditPage",
     "pages/smart/AutoDetailPage",
+    "pages/smart/AssistantPage",
     "pages/product/ProductDetailPage",
     "pages/shop/GoodsDetailPage",
     "pages/shop/CartPage",

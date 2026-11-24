@@ -1,6 +1,8 @@
 package com.smarthome.service;
 
+import com.smarthome.vo.WeatherAirVO;
 import com.smarthome.vo.WeatherNowVO;
+import com.smarthome.vo.WeatherWarningVO;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,19 @@ public interface WeatherService {
      * @param location 和风城市 id，空则用默认城市（application.yml qweather.api.location）
      */
     WeatherNowVO now(String location);
+
+    /**
+     * 查空气质量 AQI（10 分钟缓存，2026-11-23 新增）。
+     *
+     * @param location 和风城市 id，空则用默认城市
+     */
+    WeatherAirVO air(String location);
+
+    /**
+     * 查当前生效的气象预警列表（10 分钟缓存，2026-11-23 新增）。
+     * 无预警时返回空列表（不是错误）。
+     */
+    List<WeatherWarningVO> warnings(String location);
 
     /**
      * 可切换的城市列表（id + 名称，固定清单内置在后端）。
