@@ -156,11 +156,12 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     /**
-     * 全屋模式切换（2026-11-20 新增）：App → 后端 → 华为云 → 硬件。
-     * AUTO = 自动模式（光控灯 / 温控风扇 / PIR 控门 / 烟雾报警联动蜂鸣器+风扇）；
-     * MANUAL = 手动模式（一切由 App 控制，烟雾报警仍然生效——安全优先）。
-     * 先下发命令再乐观写库：设备执行成功后 ModeStatus 会上报回来，
-     * HuaweiSyncService 把库里的值对齐为硬件真实状态。
+     * 全屋模式切换（2026-11-20 新增，2026-11-25 对齐固件）：App → 后端 → 华为云 → 硬件。
+     * AUTO = 自动模式（燃气泄漏自动开蜂鸣器+风扇 / 卫生间有人自动开灯，联动在固件里）；
+     * MANUAL = 手动模式（联动不再接管，一切由 App 控制）。
+     * 实现走"设备消息"下发 smart_auto / smart_hand 纯文本——固件在串口中断里
+     * 对报文做字符串匹配改 smart_flag，不认命令格式。
+     * 固件切完不会回传状态，这里下发成功后直接写库（乐观写），没有二次确认。
      */
     @Override
     public String setMode(String mode, Long userId) {
@@ -173,7 +174,7 @@ public class DeviceServiceImpl implements DeviceService {
             throw new BizException("模式切换命令下发失败，请检查设备是否在线");
         }
 
-        // 下发成功后先写入期望值，等设备 ModeStatus 上报回来确认
+        // 下发成功后直接写入（固件没有 ModeStatus 回传，不做二次确认）
         SystemConfig cfg = systemConfigMapper.selectOne(new LambdaQueryWrapper<SystemConfig>()
                 .eq(SystemConfig::getConfigKey, HuaweiSyncService.CONFIG_KEY_MODE));
         String value = auto ? "AUTO" : "MANUAL";

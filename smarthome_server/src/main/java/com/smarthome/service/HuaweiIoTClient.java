@@ -124,15 +124,49 @@ public class HuaweiIoTClient {
     }
 
     /**
-     * 下发全屋自动/手动模式切换命令（2026-11-20 新增）。
-     * 固件侧识别 Mode_control 命令，paras.Mode 取 ON/OFF（para_on 直接命中）：
-     * ON = AUTO 自动模式，OFF = MANUAL 手动模式。
-     * 设备切换成功后 ModeStatus 会上报回来，HuaweiSyncService 把库里的值对齐。
+     * 下发全屋自动/手动模式切换（2026-11-25 对齐固件，改走设备消息）。
+     *
+     * <p>固件不认 Mode_control 命令——它的模式识别在 esp8285.c 的串口中断回调里，
+     * 对 messages 主题收到的报文原文做 strstr：包含 "smart_auto" → smart_flag=1（自动），
+     * 包含 "smart_hand" → smart_flag=0（手动）。所以这里不能走命令接口，
+     * 要走设备消息接口下发纯文本，云平台会投到固件订阅的 messages/down 主题。
+     *
+     * <p>固件没有 ModeStatus 属性上报，切完不会回传真实状态，
+     * 库里的值以本方法调用方的乐观写入为准（见 DeviceServiceImpl.setMode）。
      */
     public boolean sendModeCommand(boolean auto) {
-        Map<String, Object> paras = new LinkedHashMap<>();
-        paras.put("Mode", auto ? "ON" : "OFF");
-        return sendCommand(props.getServiceId(), "Mode_control", paras);
+        return sendMessage(auto ? "smart_auto" : "smart_hand");
+    }
+
+    /**
+     * 下发设备消息：POST /v5/iot/{projectId}/devices/{deviceId}/messages，
+     * body 只有一个 message 字段装纯文本。
+     */
+    private boolean sendMessage(String text) {
+        if (!props.isReady()) {
+            return false;
+        }
+        try {
+            JSONObject body = new JSONObject();
+            body.set("message", text);
+
+            String url = props.getEndpoint() + "/v5/iot/" + props.getProjectId()
+                    + "/devices/" + props.getDeviceId() + "/messages";
+            HttpResponse resp = HttpRequest.post(url)
+                    .header("X-Auth-Token", getToken())
+                    .body(body.toString())
+                    .timeout(8000)
+                    .execute();
+            if (!resp.isOk()) {
+                log.warn("[华为云] 消息下发失败 [{}] HTTP {}：{}", text, resp.getStatus(), resp.body());
+                return false;
+            }
+            log.info("[华为云] 模式消息已下发 [{}] → 设备 {}", text, props.getDeviceId());
+            return true;
+        } catch (Exception e) {
+            log.warn("[华为云] 消息下发异常 [{}]：{}", text, e.getMessage());
+            return false;
+        }
     }
 
     /** 通用命令下发：POST /v5/iot/{projectId}/devices/{deviceId}/commands */
